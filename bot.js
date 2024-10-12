@@ -8,13 +8,13 @@ const bot = new Telegraf("7182990304:AAH0sU4VDT8nyX0jc5uehBAL7xjlYfw1VBo");
 
 const userState = {};
 
-const keyboard = [
-    ['قیمت لحظه ای تتر']
-];
+// const keyboard = [
+//     ['قیمت لحظه ای تتر']
+// ];
 
 const fetchUsdtPrice = async () => {
     try {
-        const result = await usdtAbanTetherFetch();
+        const result = await usdtAbanTetherFetch('https://api.tetherland.com/currencies');
         return result;
     } catch (error) {
         console.error('Error fetching USDT price:', error);
@@ -78,7 +78,7 @@ bot.on('text', async (ctx) => {
 
 handleInlineButton(bot);
 
-schedule.scheduleJob('*/1 * * * *', async () => {
+schedule.scheduleJob('*/15 * * * *', async () => {
     console.log('1min left');
     try {
         await checkPriceChange(bot);
